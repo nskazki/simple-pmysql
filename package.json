@@ -5,7 +5,6 @@
   "main": "src-build/index.js",
   "scripts": {
     "prepublish": "npm run build",
-    "postinstall": "npm run build",
     "build": "babel src --retain-lines --out-dir src-build",
     "eslint": "eslint $(find . -not -path '*/*-build/*' -and -not -path '*/node_modules/*' -type f -name '*.es')",
     "test": "npm run eslint"
