@@ -1,0 +1,34 @@
+{
+  "name": "simple-pmysql",
+  "version": "1.0.0",
+  "description": "simple promisify wrapper for node-mysql",
+  "main": "src-build/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "postinstall": "npm run build",
+    "build": "babel src --retain-lines --out-dir src-build",
+    "eslint": "eslint $(find . -not -path '*/*-build/*' -and -not -path '*/node_modules/*' -type f -name '*.es')",
+    "test": "npm run eslint"
+  },
+  "keywords": [
+    "mysql",
+    "node-mysql",
+    "promise",
+    "wrapper"
+  ],
+  "author": "nskazki@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "debug": "^2.2.0",
+    "event-to-promise": "^0.6.0",
+    "lodash": "^3.10.1",
+    "mysql": "^2.10.0",
+    "simple-debugger": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-eslint": "^4.1.6",
+    "eslint": "1.10.1"
+  }
+}
