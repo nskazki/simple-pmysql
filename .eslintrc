@@ -1,7 +1,4 @@
 {
-  "globals": {
-    "gc": true
-  },
   "parser": "babel-eslint",
   "ecmaFeatures": {
     "arrowFunctions": true,
@@ -38,8 +35,7 @@
   },
   "env": {
     "es6": true,
-    "node": true,
-    "browser": true
+    "node": true
   },
   "extends": "eslint:recommended"
 }
