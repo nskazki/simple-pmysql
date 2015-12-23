@@ -41,7 +41,7 @@ export default class PMysql extends EventEmitter {
 
     this._reinitTimeoutId = null
     this._reinitAttemptInterval = 2e3
-    this._reinitBrokenDelay = 15e3
+    this._reinitBrokenDelay = 60e3
   }
 
   _wait() {
@@ -233,7 +233,7 @@ export default class PMysql extends EventEmitter {
         .then(() => this._wait())
         .then(() => P.fromNode(cb => {
           this._dbLink.query.apply(this._dbLink, [ ...args, cb ])
-        }))
+        }, { multiArgs: true }))
         .tap(() => pMysqlDebug(`query - success`))
         .catch(err => {
           pMysqlDebug(`query - problem\
