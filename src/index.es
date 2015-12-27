@@ -8,7 +8,7 @@ import Debug from 'debug'
 import mysql from 'mysql'
 import rawe2p from 'event-to-promise'
 
-let pMysqlDebug = new Debug('libs-p-mysql')
+let pMysqlDebug = new Debug('libs-pmysql')
 let e2p = (obj, res, rej) => {
   return rawe2p(obj, res, isUndefined(rej)
     ? { ignoreErrors: true}
