@@ -6,14 +6,9 @@ import P from 'bluebird'
 import EventEmitter from 'events'
 import Debug from 'debug'
 import mysql from 'mysql'
-import rawe2p from 'event-to-promise'
+import e2p from 'simple-e2p'
 
 let pMysqlDebug = new Debug('libs-pmysql')
-let e2p = (obj, res, rej) => {
-  return rawe2p(obj, res, isUndefined(rej)
-    ? { ignoreErrors: true}
-    : { error: rej })
-}
 
 export default class PMysql extends EventEmitter {
   static format(...args) {
