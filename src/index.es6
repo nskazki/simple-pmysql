@@ -1,7 +1,7 @@
 'use strict'
 
 import { debugEvents, debugMethods } from 'simple-debugger'
-import { noop, isUndefined, isFunction, isNull } from 'lodash'
+import { noop, isFunction, isNull } from 'lodash'
 import P from 'bluebird'
 import EventEmitter from 'events'
 import Debug from 'debug'
