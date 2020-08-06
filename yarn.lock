@@ -1208,7 +1208,7 @@ debug@^2.2.0, debug@^2.3.3:
   dependencies:
     ms "2.0.0"
 
-debug@^4.0.1, debug@^4.1.0:
+debug@^4.0.1, debug@^4.1.0, debug@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
   integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
@@ -1418,13 +1418,6 @@ expand-brackets@^2.1.4:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
-
-extend-lodash@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/extend-lodash/-/extend-lodash-1.0.0.tgz#49ca82b1150481ab1be3a60ba8738946ed2ac8e1"
-  integrity sha1-ScqCsRUEgasb46YLqHOJRu0qyOE=
-  dependencies:
-    lodash "^3.10.1"
 
 extend-shallow@^2.0.1:
   version "2.0.1"
@@ -1908,12 +1901,7 @@ levn@^0.4.1:
     prelude-ls "^1.2.1"
     type-check "~0.4.0"
 
-lodash@^3.10.1:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
-  integrity sha1-W/Rejkm6QYnhfUgnid/RW9FAt7Y=
-
-lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.6.1:
+lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
@@ -2350,14 +2338,13 @@ shebang-regex@^3.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
-simple-debugger@^1.0.3:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/simple-debugger/-/simple-debugger-1.0.14.tgz#4e49a27dea25efffba0526ab2788c2a36e8a02e1"
-  integrity sha1-Tkmifeol7/+6BSarJ4jCo26KAuE=
+simple-debugger@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/simple-debugger/-/simple-debugger-3.0.0.tgz#3841de3d1b245d1e87ccd1ac0e73fe6016e3351e"
+  integrity sha512-eIxsIaO7ClL3pL35R9l+RHYuk43AGYIC6xA6Qpo/39KjzQ3VnnB6pUYdPMxCKr/4uKEhGh5u4so9JbzDkBOKwA==
   dependencies:
-    debug "^2.2.0"
-    extend-lodash "^1.0.0"
-    lodash "^4.6.1"
+    debug "^4.1.1"
+    lodash "^4.17.15"
 
 simple-e2p@^1.0.1:
   version "1.0.3"
