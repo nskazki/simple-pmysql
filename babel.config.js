@@ -1,5 +1,12 @@
 'use strict'
 
 module.exports = {
-  presets: ['@babel/preset-env']
+  presets: [['@babel/preset-env', {
+    targets: {
+      node: 8
+    }
+  }]],
+  plugins: [['babel-plugin-add-module-exports', {
+    addDefaultProperty: true
+  }]]
 }
