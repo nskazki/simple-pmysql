@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "babel src --retain-lines --out-dir src-build",
-    "eslint": "eslint $(find . -not -path '*/*-build/*' -not -path '*/node_modules/*' -type f -name '*.es6')",
+    "eslint": "eslint $(find . -not -path '*/*-build/*' -not -path '*/node_modules/*' -type f -name '*.js')",
     "test": "npm run eslint"
   },
   "keywords": [
