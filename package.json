@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "babel src --retain-lines --out-dir src-build",
-    "eslint": "eslint $(find . -not -path '*/*-build/*' -not -path '*/node_modules/*' -type f -name '*.js')",
+    "eslint": "eslint .",
     "test": "npm run eslint"
   },
   "keywords": [
@@ -27,8 +27,9 @@
   },
   "devDependencies": {
     "babel": "^5.8.23",
-    "babel-eslint": "^4.1.6",
-    "eslint": "1.10.1"
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.6.0",
+    "eslint-plugin-json": "^2.1.2"
   },
   "repository": {
     "type": "git",
