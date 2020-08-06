@@ -1,9 +1,3 @@
 node_modules/
-
-*-build/
-
-*.local.*
-*-local/
-
+build/
 *.log
-
