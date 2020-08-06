@@ -6,7 +6,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "babel src --retain-lines --out-dir src-build",
-    "eslint": "eslint .",
+    "eslint": "eslint --ext .json,.js .",
     "test": "npm run eslint"
   },
   "keywords": [
