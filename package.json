@@ -2,12 +2,12 @@
   "name": "simple-pmysql",
   "version": "3.0.1",
   "description": "simple promisify wrapper for node-mysql",
-  "main": "build/index.js",
+  "main": "build",
   "scripts": {
-    "prepublish": "npm run build",
-    "build": "babel src --out-dir build",
+    "prepublish": "yarn run build",
+    "build": "babel src -d build",
     "eslint": "eslint --ext .json,.js .",
-    "test": "npm run eslint"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "mysql",
