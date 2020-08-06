@@ -1,5 +1,3 @@
-'use strict'
-
 import { debugEvents, debugMethods } from 'simple-debugger'
 import { noop, isFunction, isNull } from 'lodash'
 import P from 'bluebird'
@@ -8,7 +6,7 @@ import Debug from 'debug'
 import mysql from 'mysql'
 import e2p from 'simple-e2p'
 
-let pMysqlDebug = new Debug('libs-pmysql')
+const pMysqlDebug = new Debug('libs-pmysql')
 
 export default class PMysql extends EventEmitter {
   static format(...args) {
@@ -20,8 +18,13 @@ export default class PMysql extends EventEmitter {
     this.setMaxListeners(0)
 
     debugEvents(this)
-    debugMethods(this, [ 'on', 'once', 'emit',
-      'addListener', 'removeListener' ])
+    debugMethods(this, [
+      'on',
+      'once',
+      'emit',
+      'addListener',
+      'removeListener'
+    ])
 
     this.dbParams = dbParams
 
@@ -59,7 +62,7 @@ export default class PMysql extends EventEmitter {
     this.once('_pingProblem', this._pingProblemHandler)
     this._pingProcessId = setTimeout(() => {
       if (this._isBroken) {
-        pMysqlDebug(`ping - not performed, module broken -> just skip`)
+        pMysqlDebug('ping - not performed, module broken -> just skip')
         return
       }
 
@@ -68,11 +71,11 @@ export default class PMysql extends EventEmitter {
         .then(() => P.fromNode(cb => this._dbLink.ping(cb)))
         .then(() => {
           if (this._isBroken) {
-            pMysqlDebug(`ping - success, module broken -> just skip`)
+            pMysqlDebug('ping - success, module broken -> just skip')
             return
           }
 
-          pMysqlDebug(`ping - success -> #_restartPingProcess`)
+          pMysqlDebug('ping - success -> #_restartPingProcess')
           this._restartPingProcess()
         }, err => {
           if (this._isBroken) {
@@ -105,8 +108,8 @@ export default class PMysql extends EventEmitter {
 
   init() {
     if (this._isBroken) {
-      pMysqlDebug(`init - not performed, module broken -> throw Error`)
-      return P.reject(new Error(`init - not performed, becouse module is broken`))
+      pMysqlDebug('init - not performed, module broken -> throw Error')
+      return P.reject(new Error('init - not performed, becouse module is broken'))
     }
 
     return P.resolve()
@@ -120,11 +123,11 @@ export default class PMysql extends EventEmitter {
       }))
       .then(() => {
         if (this._isBroken) {
-          pMysqlDebug(`init - success, module broken -> throw Error`)
-          return P.reject(new Error(`init - success, but module is broken`))
+          pMysqlDebug('init - success, module broken -> throw Error')
+          return P.reject(new Error('init - success, but module is broken'))
         }
 
-        pMysqlDebug(`init - success -> #_restartPingProcess and !_connected`)
+        pMysqlDebug('init - success -> #_restartPingProcess and !_connected')
         this._restartPingProcess()
         this._isConnected = true
         this.emit('_connected')
@@ -143,14 +146,14 @@ export default class PMysql extends EventEmitter {
 
   kill() {
     if (this._isBroken) {
-      pMysqlDebug(`kill - not performed, module broken -> throw Error`)
-      return P.reject(new Error(`kill - not performed, becouse module is broken`))
+      pMysqlDebug('kill - not performed, module broken -> throw Error')
+      return P.reject(new Error('kill - not performed, becouse module is broken'))
     }
 
     return P.resolve()
       .then(() => this._wait())
       .then(() => {
-        pMysqlDebug(`kill - started -> #_stopPingProcess and !_disconnected`)
+        pMysqlDebug('kill - started -> #_stopPingProcess and !_disconnected')
         this._stopPingProcess()
         this._isConnected = false
         this.emit('_disconnected')
@@ -160,11 +163,11 @@ export default class PMysql extends EventEmitter {
       }))
       .then(() => {
         if (this._isBroken) {
-          pMysqlDebug(`kill - success, module broken -> throw Error`)
-          return P.reject(new Error(`kill - success, but module is broken`))
+          pMysqlDebug('kill - success, module broken -> throw Error')
+          return P.reject(new Error('kill - success, but module is broken'))
         }
 
-        pMysqlDebug(`kill - success`)
+        pMysqlDebug('kill - success')
       })
       .catch(err => {
         pMysqlDebug(`kill - problem\
@@ -176,18 +179,18 @@ export default class PMysql extends EventEmitter {
 
   _reinit() {
     if (this._isBroken) {
-      pMysqlDebug(`_reinit - not performed, module broken -> skip`)
+      pMysqlDebug('_reinit - not performed, module broken -> skip')
       return
     }
 
-    pMysqlDebug(`_reinit - started ->  #_initReinitTimeout`)
+    pMysqlDebug('_reinit - started ->  #_initReinitTimeout')
     this._initReinitTimeout()
 
     P.resolve()
       .then(() => this.kill().catch(noop))
       .then(() => this.init())
       .then(() => {
-        pMysqlDebug(`_reinit - success -> #_killReinitTimeout`)
+        pMysqlDebug('_reinit - success -> #_killReinitTimeout')
         this._killReinitTimeout()
       }, err => {
         pMysqlDebug(`_reinit - problem -> #_reinit after delay\
@@ -200,13 +203,13 @@ export default class PMysql extends EventEmitter {
 
   _initReinitTimeout() {
     if (!isNull(this._reinitTimeoutId)) {
-      pMysqlDebug(`_initReinitTimeout - already exists`)
+      pMysqlDebug('_initReinitTimeout - already exists')
     } else {
-      pMysqlDebug(`_initReinitTimeout - setup`)
+      pMysqlDebug('_initReinitTimeout - setup')
       this._reinitTimeoutId = setTimeout(() => {
-        pMysqlDebug(`_initReinitTimeout - timeout -> !_broken`)
+        pMysqlDebug('_initReinitTimeout - timeout -> !_broken')
         this._isBroken = true
-        this.emit('_broken', new Error(`module was broken`))
+        this.emit('_broken', new Error('module was broken'))
       }, this._reinitBrokenDelay)
     }
   }
@@ -218,18 +221,18 @@ export default class PMysql extends EventEmitter {
 
   query(...args) {
     if (this._isBroken) {
-      pMysqlDebug(`query - not performed, module broken -> throw Error`)
+      pMysqlDebug('query - not performed, module broken -> throw Error')
       return P.reject(new Error('connection has been lost, restore was failed'))
     }
 
     if (this._isConnected) {
-      pMysqlDebug(`query - started`)
+      pMysqlDebug('query - started')
       return P.resolve()
         .then(() => this._wait())
         .then(() => P.fromNode(cb => {
-          this._dbLink.query.apply(this._dbLink, [ ...args, cb ])
+          this._dbLink.query(...args, cb)
         }, { multiArgs: true }))
-        .tap(() => pMysqlDebug(`query - success`))
+        .tap(() => pMysqlDebug('query - success'))
         .catch(err => {
           pMysqlDebug(`query - problem\
             \n\t err: ${err.message}`)
@@ -237,14 +240,14 @@ export default class PMysql extends EventEmitter {
         })
         .finally(() => this._free())
     } else {
-      pMysqlDebug(`query - pause, module not connected`)
+      pMysqlDebug('query - pause, module not connected')
       return e2p(this, '_connected', '_broken')
         .catch(err => {
           pMysqlDebug(`query - broken\
             \n\t err: ${err.message}`)
           throw err
         })
-        .then(() => pMysqlDebug(`query - unpause`))
+        .then(() => pMysqlDebug('query - unpause'))
         .then(() => this.query.apply(this, args))
     }
   }
